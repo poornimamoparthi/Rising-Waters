@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Risk Prediction Input - Rising Waters</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Navbar -->
+        <header>
+            <div class="logo">
+                <span class="logo-icon">🌊</span>
+                <span>Rising Waters</span>
+            </div>
+            <nav>
+                <a href="{{ url_for('index') }}">Home</a>
+                <a href="{{ url_for('predict_input') }}" class="active">Predict Risk</a>
+            </nav>
+        </header>
+
+        <div class="form-container">
+            <h2 class="form-title">Flood Risk Predictor</h2>
+            <p class="form-subtitle">Enter local weather, rainfall, and atmospheric variables to compute the risk index using our XGBoost model.</p>
+
+            {% if error %}
+            <div class="alert-error">
+                {{ error }}
+            </div>
+            {% endif %}
+
+            <div class="glass-card">
+                <form action="{{ url_for('predict') }}" method="POST" class="predict-form">
+                    
+                    <div class="form-group">
+                        <label for="Annual_Rainfall">Annual Rainfall (mm)</label>
+                        <input type="number" step="any" id="Annual_Rainfall" name="Annual_Rainfall" 
+                               value="{{ defaults.Annual_Rainfall }}" min="500" max="6000" required>
+                        <span class="input-helper">Typical range: 800 - 4500 mm</span>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="Seasonal_Rainfall">Seasonal Rainfall (mm)</label>
+                        <input type="number" step="any" id="Seasonal_Rainfall" name="Seasonal_Rainfall" 
+                               value="{{ defaults.Seasonal_Rainfall }}" min="200" max="5000" required>
+                        <span class="input-helper">Rainfall in heavy season. Range: 400 - 3500 mm</span>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="Cloud_Visibility">Cloud Visibility (km)</label>
+                        <input type="number" step="any" id="Cloud_Visibility" name="Cloud_Visibility" 
+                               value="{{ defaults.Cloud_Visibility }}" min="0" max="10" required>
+                        <span class="input-helper">Atmospheric visibility: 0 (poor) to 10 (clear)</span>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="Temperature">Temperature (°C)</label>
+                        <input type="number" step="any" id="Temperature" name="Temperature" 
+                               value="{{ defaults.Temperature }}" min="10" max="50" required>
+                        <span class="input-helper">Avg ambient temperature: 15°C - 45°C</span>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="Humidity">Humidity (%)</label>
+                        <input type="number" step="any" id="Humidity" name="Humidity" 
+                               value="{{ defaults.Humidity }}" min="20" max="100" required>
+                        <span class="input-helper">Relative humidity: 45% - 100%</span>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="Wind_Speed">Wind Speed (km/h)</label>
+                        <input type="number" step="any" id="Wind_Speed" name="Wind_Speed" 
+                               value="{{ defaults.Wind_Speed }}" min="0" max="100" required>
+                        <span class="input-helper">Average local wind speed: 3 - 60 km/h</span>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="Pressure">Atmospheric Pressure (hPa)</label>
+                        <input type="number" step="any" id="Pressure" name="Pressure" 
+                               value="{{ defaults.Pressure }}" min="950" max="1050" required>
+                        <span class="input-helper">Barometric reading. Range: 950 - 1050 hPa</span>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="Weather_Condition">Weather Condition</label>
+                        <select id="Weather_Condition" name="Weather_Condition" required>
+                            <option value="Sunny" {% if defaults.Weather_Condition == 'Sunny' %}selected{% endif %}>Sunny</option>
+                            <option value="Cloudy" {% if defaults.Weather_Condition == 'Cloudy' %}selected{% endif %}>Cloudy</option>
+                            <option value="Overcast" {% if defaults.Weather_Condition == 'Overcast' %}selected{% endif %}>Overcast</option>
+                            <option value="Rainy" {% if defaults.Weather_Condition == 'Rainy' %}selected{% endif %}>Rainy</option>
+                        </select>
+                        <span class="input-helper">General sky & weather classification</span>
+                    </div>
+
+                    <div class="form-actions">
+                        <button type="reset" class="btn btn-secondary">Reset Fields</button>
+                        <button type="submit" class="btn btn-primary">Calculate Risk &rarr;</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer>
+            <p>&copy; 2026 Rising Waters project. Powered by Python, Scikit-learn, XGBoost, Flask & IBM Cloud.</p>
+        </footer>
+    </div>
+    
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>
