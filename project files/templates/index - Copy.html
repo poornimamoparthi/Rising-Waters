@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rising Waters - ML Flood Prediction</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Navbar -->
+        <header>
+            <div class="logo">
+                <span class="logo-icon">🌊</span>
+                <span>Rising Waters</span>
+            </div>
+            <nav>
+                <a href="{{ url_for('index') }}" class="active">Home</a>
+                <a href="{{ url_for('predict_input') }}">Predict Risk</a>
+            </nav>
+        </header>
+
+        <!-- Hero Section -->
+        <section class="hero">
+            <h1>Predicting Flood Risks with <span>Machine Learning</span></h1>
+            <p>Rising Waters leverages state-of-the-art predictive analytics to estimate flood probability from meteorological, atmospheric, and rainfall factors. Empowering disaster preparedness with instant, data-driven decisions.</p>
+            <div>
+                <a href="{{ url_for('predict_input') }}" class="btn btn-primary">Start Prediction Form &rarr;</a>
+            </div>
+        </section>
+
+        <!-- Features Grid -->
+        <section class="features-grid">
+            <div class="glass-card feature-item">
+                <div class="feature-icon">📊</div>
+                <h3>Advanced Data Analytics</h3>
+                <p>We process parameters including annual rainfall, seasonal patterns, temperature, and cloud visibility to determine local soil saturation and run-off levels.</p>
+            </div>
+
+            <div class="glass-card feature-item">
+                <div class="feature-icon">🤖</div>
+                <h3>XGBoost Intelligence</h3>
+                <p>Features are evaluated using a pre-trained XGBoost Classifier, selected for its high accuracy and robust handling of non-linear environmental relationships.</p>
+            </div>
+
+            <div class="glass-card feature-item">
+                <div class="feature-icon">⚡</div>
+                <h3>Instant Insights</h3>
+                <p>Input parameters to receive immediate, classified risk profiles along with customized recommendations to support local emergency preparedness.</p>
+            </div>
+        </section>
+
+        <!-- Tech Details / Descriptive Section -->
+        <section class="glass-card" style="margin-bottom: 4rem; text-align: center;">
+            <h2 style="font-family: var(--font-outfit); font-size: 1.8rem; margin-bottom: 1rem;">Model Diagnostics</h2>
+            <p style="color: var(--text-secondary); margin-bottom: 2rem; max-width: 800px; margin-left: auto; margin-right: auto;">Our pipeline evaluates and compares multiple architectures to ensure maximum precision. During training, XGBoost demonstrated exceptional capacity, achieving an accuracy score of <strong>96.55%</strong>.</p>
+            
+            <div style="display: flex; justify-content: center; gap: 3rem; flex-wrap: wrap;">
+                <div>
+                    <div style="font-size: 2.2rem; font-weight: 700; color: var(--accent-teal);">96.55%</div>
+                    <div style="color: var(--text-secondary); font-size: 0.85rem;">XGBoost Accuracy</div>
+                </div>
+                <div style="border-left: 1px solid rgba(255, 255, 255, 0.1); height: 50px;"></div>
+                <div>
+                    <div style="font-size: 2.2rem; font-weight: 700; color: var(--accent-teal);">96.90%</div>
+                    <div style="color: var(--text-secondary); font-size: 0.85rem;">Random Forest Accuracy</div>
+                </div>
+                <div style="border-left: 1px solid rgba(255, 255, 255, 0.1); height: 50px;"></div>
+                <div>
+                    <div style="font-size: 2.2rem; font-weight: 700; color: var(--accent-teal);">1,450</div>
+                    <div style="color: var(--text-secondary); font-size: 0.85rem;">Weather Records Used</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer>
+            <p>&copy; 2026 Rising Waters project. Powered by Python, Scikit-learn, XGBoost, Flask & IBM Cloud.</p>
+        </footer>
+    </div>
+</body>
+</html>
