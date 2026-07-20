@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Low Flood Risk Reassurance - Rising Waters</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Navbar -->
+        <header>
+            <div class="logo">
+                <span class="logo-icon">🌊</span>
+                <span>Rising Waters</span>
+            </div>
+            <nav>
+                <a href="{{ url_for('index') }}">Home</a>
+                <a href="{{ url_for('predict_input') }}">Predict Risk</a>
+            </nav>
+        </header>
+
+        <!-- Result Card -->
+        <div class="glass-card result-card no-flood">
+            <div class="result-icon no-flood">✅</div>
+            <h2 class="result-title no-flood">Minimal Flood Risk Detected</h2>
+            
+            <div class="percentage-badge" style="color: var(--accent-green);">
+                {{ probability }}%
+            </div>
+            
+            <p class="result-description">
+                Based on your meteorological input data, our machine learning model has evaluated a very low probability of flood conditions. Current weather parameters show no signs of immediate threat.
+            </p>
+
+            <!-- Parameters Dashboard -->
+            <div class="parameters-summary">
+                <h4>Submitted Meteorological Data</h4>
+                <div class="parameters-grid">
+                    <div class="param-item">
+                        <span class="param-label">Annual Rainfall:</span>
+                        <span class="param-value">{{ inputs.Annual_Rainfall }} mm</span>
+                    </div>
+                    <div class="param-item">
+                        <span class="param-label">Seasonal Rainfall:</span>
+                        <span class="param-value">{{ inputs.Seasonal_Rainfall }} mm</span>
+                    </div>
+                    <div class="param-item">
+                        <span class="param-label">Cloud Visibility:</span>
+                        <span class="param-value">{{ inputs.Cloud_Visibility }} km</span>
+                    </div>
+                    <div class="param-item">
+                        <span class="param-label">Temperature:</span>
+                        <span class="param-value">{{ inputs.Temperature }} °C</span>
+                    </div>
+                    <div class="param-item">
+                        <span class="param-label">Humidity:</span>
+                        <span class="param-value">{{ inputs.Humidity }} %</span>
+                    </div>
+                    <div class="param-item">
+                        <span class="param-label">Wind Speed:</span>
+                        <span class="param-value">{{ inputs.Wind_Speed }} km/h</span>
+                    </div>
+                    <div class="param-item">
+                        <span class="param-label">Atmospheric Pressure:</span>
+                        <span class="param-value">{{ inputs.Pressure }} hPa</span>
+                    </div>
+                    <div class="param-item">
+                        <span class="param-label">Weather Condition:</span>
+                        <span class="param-value">{{ inputs.Weather_Condition }}</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Recommendations -->
+            <div style="text-align: left; padding: 1.5rem; background: rgba(16, 185, 129, 0.05); border-radius: 12px; border: 1px solid rgba(16, 185, 129, 0.2); margin-bottom: 2rem;">
+                <h4 style="font-family: var(--font-outfit); font-size: 1.15rem; color: var(--accent-green); margin-bottom: 0.75rem;">Standard Safety Guidelines:</h4>
+                <ul style="list-style-type: none; padding-left: 0; color: var(--text-secondary); display: flex; flex-direction: column; gap: 0.5rem; font-size: 0.95rem;">
+                    <li>☀️ <strong>Normal Operations:</strong> No emergency actions are required under current conditions.</li>
+                    <li>🏡 <strong>Drainage Maintenance:</strong> Keep gutters and street drains clear of debris to prevent localized pooling during normal rain.</li>
+                    <li>🔄 <strong>Periodic Checks:</strong> Re-calculate if a severe storm is forecasted or conditions change rapidly.</li>
+                </ul>
+            </div>
+
+            <div style="display: flex; justify-content: center; gap: 1.5rem;">
+                <a href="{{ url_for('predict_input') }}" class="btn btn-secondary">&larr; Re-calculate</a>
+                <a href="{{ url_for('index') }}" class="btn btn-primary">Return Home</a>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer>
+            <p>&copy; 2026 Rising Waters project. Powered by Python, Scikit-learn, XGBoost, Flask & IBM Cloud.</p>
+        </footer>
+    </div>
+</body>
+</html>
